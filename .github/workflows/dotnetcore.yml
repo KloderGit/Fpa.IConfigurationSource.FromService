@@ -9,7 +9,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -22,11 +22,8 @@ jobs:
         export GITHUB_ACTOR_LOWERCASE="$(echo $GITHUB_ACTOR | tr '[:upper:]' '[:lower:]')"
         echo "::set-env name=GitHubActorLowercase::$GITHUB_ACTOR_LOWERCASE"      
 
-    - name: Restore
-      run: dotnet restore
-
     - name: Build and Pack with dotnet
-      run: dotnet pack --configuration Release -o ./${{ env.RepositoryName }}/publish 
+      run: dotnet pack --configuration Release -o .\${{ env.RepositoryName }}\publish 
       
     - name: Setup Nuget.exe
       uses: nuget/setup-nuget@v1
@@ -35,4 +32,4 @@ jobs:
       run: nuget source Add -Name "GitHub" -Source "https://nuget.pkg.github.com/KloderGit/index.json" -UserName KloderGit -Password ${{ secrets.GITHUB_TOKEN }}
       
     - name: Push
-      run: dotnet nuget push -s GitHub -k ${{ secrets.GITHUB_TOKEN }} ./${{ env.RepositoryName }}/publish/*.nupkg   
+      run: dotnet nuget push -s GitHub -k ${{ secrets.GITHUB_TOKEN }} .\${{ env.RepositoryName }}\publish\*.nupkg   
