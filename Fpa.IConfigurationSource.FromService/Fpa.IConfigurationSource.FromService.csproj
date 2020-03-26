@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Authors>KloderGit</Authors>
+    <Company>Fpa</Company>
+    <Copyright>KloderGit</Copyright>
+    <PackageProjectUrl>https://github.com/KloderGit/Fpa.IConfigurationSource.FromService</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/KloderGit/Fpa.IConfigurationSource.FromService</RepositoryUrl>
+    <RepositoryType>library</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
