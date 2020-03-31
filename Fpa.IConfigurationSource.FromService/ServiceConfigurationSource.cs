@@ -10,14 +10,6 @@ namespace Fpa.IConfigurationSource.FromService
         private Uri Source { get; set; }
         private string Key { get; set; }
 
-        public ServiceConfigurationSource(string server, string rootKey)
-        {
-            _ = server ?? throw new ArgumentNullException("Не указан сервер конфигураций");
-            _ = rootKey ?? throw new ArgumentNullException("Не указан ключ конфигурации");
-            Source = new Uri(server, UriKind.Absolute);
-            Key = rootKey;
-        }
-
         public ServiceConfigurationSource(Uri server, string rootKey)
         {
             _ = server ?? throw new ArgumentNullException("Не указан сервер конфигураций");
@@ -35,7 +27,7 @@ namespace Fpa.IConfigurationSource.FromService
 
         private string PathBuilder()
         {
-            return "/api" + "/Assembly/" + Key;
+            return "/" + Key;
         }
     }
 }
