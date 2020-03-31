@@ -14,7 +14,15 @@ namespace Fpa.IConfigurationSource.FromService
         {
             _ = server ?? throw new ArgumentNullException("Не указан сервер конфигураций");
             _ = rootKey ?? throw new ArgumentNullException("Не указан ключ конфигурации");
-            Source = new Uri(server);
+            Source = new Uri(server, UriKind.Absolute);
+            Key = rootKey;
+        }
+
+        public ServiceConfigurationSource(Uri server, string rootKey)
+        {
+            _ = server ?? throw new ArgumentNullException("Не указан сервер конфигураций");
+            _ = rootKey ?? throw new ArgumentNullException("Не указан ключ конфигурации");
+            Source = server;
             Key = rootKey;
         }
 
