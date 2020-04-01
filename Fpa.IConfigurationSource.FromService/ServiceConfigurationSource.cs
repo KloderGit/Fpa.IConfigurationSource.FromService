@@ -10,11 +10,11 @@ namespace Fpa.IConfigurationSource.FromService
         private Uri Source { get; set; }
         private string Key { get; set; }
 
-        public ServiceConfigurationSource(Uri server, string rootKey)
+        public ServiceConfigurationSource(string server, string rootKey)
         {
             _ = server ?? throw new ArgumentNullException("Не указан сервер конфигураций");
             _ = rootKey ?? throw new ArgumentNullException("Не указан ключ конфигурации");
-            Source = server;
+            Source = new Uri(GetAddressWithProtocol(server));
             Key = rootKey;
         }
 
@@ -28,6 +28,18 @@ namespace Fpa.IConfigurationSource.FromService
         private string PathBuilder()
         {
             return "/" + Key;
+        }
+
+        private string GetAddressWithProtocol(string host)
+        {
+            var prot = "http://";
+
+            if (host.Length < prot.Length || host.Substring(0, 7) != prot)
+            {
+                return prot + host;
+            }
+
+            return host;
         }
     }
 }
